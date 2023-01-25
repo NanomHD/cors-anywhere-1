@@ -3,7 +3,7 @@
  * to have extra functionality on top of the default CORS server. If it may be
  * useful to others, please open a feature request on the issue tracker at
  * https://github.com/Rob--W/cors-anywhere/issues.
- *
+ *TEST
  * If it is only useful to your application, look below for some examples.
  * These examples are provided as-is without guarantees. Use at your own risk.
  */
