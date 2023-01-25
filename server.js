@@ -7,6 +7,10 @@ var port = process.env.PORT || 8080;
 // again. CORS Anywhere is open by design, and this blacklist is not used, except for countering
 // immediate abuse (e.g. denial of service). If you want to block all origins except for some,
 // use originWhitelist instead.
+
+process.env.CORSANYWHERE_WHITELIST = 'www.kurfuerst-hotel.de,www.kurfuerst-chalet.de';
+
+
 var originBlacklist = parseEnvList(process.env.CORSANYWHERE_BLACKLIST);
 var originWhitelist = parseEnvList(process.env.CORSANYWHERE_WHITELIST);
 function parseEnvList(env) {
@@ -22,12 +26,13 @@ var checkRateLimit = require('./lib/rate-limit')(process.env.CORSANYWHERE_RATELI
 var cors_proxy = require('./lib/cors-anywhere');
 cors_proxy.createServer({
   originBlacklist: originBlacklist,
-  originWhitelist: originWhitelist,
+  originWhitelist: ['www.kurfuerst-hotel.de','www.kurfuerst-chalet.de'],
   requireHeader: ['origin', 'x-requested-with'],
   checkRateLimit: checkRateLimit,
+  setHeaders: {'content-type:application/x-www-form-urlencoded; charset=UTF-8'},     
   removeHeaders: [
-    'cookie',
-    'cookie2',
+    //'cookie',
+    //'cookie2',
     // Strip Heroku-specific headers
     'x-request-start',
     'x-request-id',
